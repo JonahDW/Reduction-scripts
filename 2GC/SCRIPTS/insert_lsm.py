@@ -5,7 +5,7 @@ from astropy.table import Table
 msfile = sys.argv[3]
 catalog = sys.argv[4]
 
-#Add components to model
+# Add components to model
 image_cat = Table.read(catalog)
 bright_src = image_cat[image_cat['Peak_flux'] > 0.01]
 
