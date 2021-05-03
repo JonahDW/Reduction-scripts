@@ -26,5 +26,6 @@ tclean(vis=msfile,
        weighting='briggs',
        robust=-0.5,
        niter=niters,
+       threshold='0.02mJy',
        mask=mask_file,
        interactive=False)

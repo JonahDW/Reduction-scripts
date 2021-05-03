@@ -27,16 +27,9 @@ casa --nogui -c SCRIPTS/insert_lsm.py ${MS}.ms IMAGES/${MS}_p0_bdsfcat.fits
 casa --nogui -c SCRIPTS/pcal.py ${MS}.ms '256s' 'GP1'
 casa --nogui -c SCRIPTS/clean.py ${MS}.ms 50000 'p1' IMAGES/${MS}_p0_mask.crtf
 
-# Third phase calibration
+# Amplitude calibration
 python $sf_script mask IMAGES/${MS}_p1.image.tt0 -s 2.0 --spectral_index
 casa --nogui -c SCRIPTS/insert_lsm.py ${MS}.ms IMAGES/${MS}_p1_bdsfcat.fits
 
-casa --nogui -c SCRIPTS/pcal.py ${MS}.ms '64s' 'GP2'
-casa --nogui -c SCRIPTS/clean.py ${MS}.ms 100000 'p2' IMAGES/${MS}_p1_mask.crtf
-
-# Amplitude calibration
-python $sf_script mask IMAGES/${MS}_p2.image.tt0 -s 2.5 --spectral_index
-casa --nogui -c SCRIPTS/insert_lsm.py ${MS}.ms IMAGES/${MS}_p2_bdsfcat.fits
-
-casa --nogui -c SCRIPTS/apcal.py ${MS}.ms '256s' GAINTABLES/${MS}.GP2
-casa --nogui -c SCRIPTS/clean.py ${MS}.ms 200000 'ap0' IMAGES/${MS}_p2_mask.crtf
+casa --nogui -c SCRIPTS/apcal.py ${MS}.ms '256s' GAINTABLES/${MS}.GP1
+casa --nogui -c SCRIPTS/clean.py ${MS}.ms 100000 'ap0' IMAGES/${MS}_p1_mask.crtf
