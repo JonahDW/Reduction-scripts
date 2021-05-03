@@ -1,6 +1,12 @@
 #!/bin/bash
 set -e
 
+# Create output folders if not exist
+mkdir -p PLOTS
+mkdir -p IMAGES
+mkdir -p GAINPLOTS
+mkdir -p GAINTABLES
+
 MS=LSB1chav16
 bpcal='J1939-6342'
 apcal='J2329-4730'
