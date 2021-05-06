@@ -1,18 +1,21 @@
-from sys import argv
-msfile=argv[3]
+import sys
 
-flagdata(vis=msfile,
-         mode='manual',
-         autocorr=True)
+import casatasks as ct
 
-flagdata(vis=msfile,
-         mode='clip',
-         clipzeros=True)
+msfile=sys.argv[1]
+
+ct.flagdata(vis=msfile,
+            mode='manual',
+            autocorr=True)
+
+ct.flagdata(vis=msfile,
+            mode='clip',
+            clipzeros=True)
 
 #MeerKAT RFI regions
-flagdata(vis=msfile,
-         mode='manual',
-         spw="""0:935.0~960.0MHz ;
+ct.flagdata(vis=msfile,
+            mode='manual',
+            spw="""0:935.0~960.0MHz ;
                 1083~1095MHz ;
                 1167.8~1185.6MHz ;
                 1200.6~1213.0MHz ;
@@ -24,11 +27,11 @@ flagdata(vis=msfile,
                 1588.4~1593.3MHz ;
                 1599~1606MHz""")
 
-flagmanager(vis=msfile,
-            mode='save',
-            versionname='basic')
+ct.flagmanager(vis=msfile,
+               mode='save',
+               versionname='basic')
 
-flagdata(vis=msfile,
-         mode='tfcrop',
-         action='apply',
-         display='')
+ct.flagdata(vis=msfile,
+            mode='tfcrop',
+            action='apply',
+            display='')

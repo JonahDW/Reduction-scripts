@@ -1,9 +1,11 @@
 import os
 import sys
-from astropy.table import Table
 
-msfile = sys.argv[3]
-catalog = sys.argv[4]
+from astropy.table import Table
+from casatools import componentlist as cl
+
+msfile = sys.argv[1]
+catalog = sys.argv[2]
 
 # Add components to model
 image_cat = Table.read(catalog)

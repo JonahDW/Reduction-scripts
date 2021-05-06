@@ -1,5 +1,9 @@
-from sys import argv
-msfile=argv[3]
+import sys
+
+from casaplotms import plotms
+from casatasks import plotants
+
+msfile=argv[1]
 
 # Plot antennas
 plotants(vis=msfile,

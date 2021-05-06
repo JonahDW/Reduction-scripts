@@ -1,29 +1,34 @@
-from sys import argv
+import sys
+import os
 
-msfile = argv[3]
-solint = argv[4]
-gptab = argv[5]
+import casatasks as ct
 
-gaptab = 'GAINTABLES/'+os.path.splitext(msfile)[0]+'.GAP0'
+msfile = sys.argv[1]
+solint = sys.argv[2]
+run = sys.argv[3]
 
-gaincal(vis=msfile,
-    field='0',
-    caltable=gaptab,
-    refant = 'm001',
-    solint=solint,
-    solnorm=False,
-    combine='',
-    minsnr=3,
-    calmode='a',
-    parang=False,
-    gaintable=[gptab],
-    append=False)
+gptab = sys.argv[4]
 
-applycal(vis=msfile,
-    gaintable=[gptab,gaptab],
-    field='0',
-    calwt=False,
-    parang=False,
-    applymode='calonly',
-    gainfield=['',''],
-    interp = ['nearest','linear'])
+gaptab = 'GAINTABLES/'+os.path.splitext(msfile)[0]+'.'+run
+
+ct.gaincal(vis=msfile,
+           field='0',
+           caltable=gaptab,
+           refant = 'm001',
+           solint=solint,
+           solnorm=False,
+           combine='',
+           minsnr=3,
+           calmode='ap',
+           parang=False,
+           gaintable=[gptab],
+           append=False)
+
+ct.applycal(vis=msfile,
+            gaintable=[gptab,gaptab],
+            field='0',
+            calwt=False,
+            parang=False,
+            applymode='calonly',
+            gainfield=['',''],
+            interp = ['nearest','linear'])
