@@ -10,7 +10,7 @@ imname =  sys.argv[3]
 try:
     mask_file = sys.argv[4]
 except IndexError:
-    mask_file = None
+    mask_file = "circle[[2560pix,2560pix],10pix]"
 
 imagename = 'IMAGES/'+os.path.basename(msfile).split('.')[0]+'_'+imname
 
